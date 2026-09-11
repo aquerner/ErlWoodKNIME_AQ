@@ -17,6 +17,13 @@
 			<groupId>net.sf.jsci</groupId>
 			<artifactId>jsci</artifactId>
 			<version>1.2</version>
+			<exclusions>
+				<!-- org.w3c.dom is provided by the java.xml module -->
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<dependency>
