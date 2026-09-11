@@ -10,8 +10,10 @@
 
 	<properties>
 		<maven.deploy.version>3.0.0-M1</maven.deploy.version>
-		<maven.dependency.version>3.1.1</maven.dependency.version>
-		<tycho.version>1.6.0</tycho.version>
+		<maven.dependency.version>3.8.1</maven.dependency.version>
+		<tycho.version>4.0.13</tycho.version>
+		<java.release>21</java.release>
+		<maven.compiler.release>${java.release}</maven.compiler.release>
 		
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<lib.directory>${project.basedir}/target/lib</lib.directory>
@@ -32,8 +34,8 @@
 		<module>features/org.erlwood.features.cheminformatics.base</module>
 
 		<!-- test plugin modules -->
-		<!-- <module>tests/org.erlwood.knime.core.test</module>
-		<module>tests/org.erlwood.knime.webservice.core.test</module> -->
+		<module>tests/org.erlwood.knime.core.test</module>
+		<module>tests/org.erlwood.knime.webservice.core.test</module>
 	</modules>
 	
 	<profiles>
@@ -96,6 +98,8 @@
 	                    <configuration>
 	                    	<outputDirectory>${lib.directory}</outputDirectory>
 	                        <includeScope>runtime</includeScope>
+	                        <excludeGroupIds>${project.groupId}</excludeGroupIds>
+	                        <excludeTypes>eclipse-plugin,eclipse-feature,eclipse-test-plugin,eclipse-target-definition</excludeTypes>
 	                        <stripVersion>true</stripVersion>
 	                    </configuration>
 	                </execution>
@@ -107,9 +111,8 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<resolver>p2</resolver>
 					<pomDependencies>consider</pomDependencies>
-					<ignoreTychoRepositories>true</ignoreTychoRepositories>
+					<executionEnvironment>JavaSE-${java.release}</executionEnvironment>
 
 					<target>
 						<artifact>
@@ -127,9 +130,15 @@
 						</environment>
 
 						<environment>
-							<os>macos</os>
+							<os>macosx</os>
 							<ws>cocoa</ws>
 							<arch>x86_64</arch>
+						</environment>
+
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>aarch64</arch>
 						</environment>
 
 						<environment>
@@ -143,10 +152,21 @@
 
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<release>${java.release}</release>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
 					<useUIHarness>false</useUIHarness>
+					<failIfNoTests>true</failIfNoTests>
+					<trimStackTrace>false</trimStackTrace>
 				</configuration>
 			</plugin>
 
@@ -155,7 +175,6 @@
 				<artifactId>tycho-packaging-plugin</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
-					<archiveSite>true</archiveSite>
 					<strictVersions>false</strictVersions>
 				</configuration>
 			</plugin>
