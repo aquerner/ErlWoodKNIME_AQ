@@ -69,9 +69,7 @@ public class ApacheRESTWebServiceClientTest extends TestCase {
 		
 		verify(configBuilder).setConnectTimeout(CONNECTION_TIMEOUT);
 		verify(configBuilder).setSocketTimeout(CONNECTION_TIMEOUT);
-		verify(apacheRESTWebServiceClient).getCredentialsProvider(valueObjectEq(new NtlmPasswordAuthentication(credentials.getUsername(), 
-		    										  credentials.getPassword(), 
-		    										  credentials.getDomain())));
+		verify(apacheRESTWebServiceClient).getCredentialsProvider(valueObjectEq(new NtlmPasswordAuthentication(credentials.getDomain(), credentials.getUsername(), credentials.getPassword())));
 		verify(builder).build();
 	}
 	
@@ -93,14 +91,10 @@ public class ApacheRESTWebServiceClientTest extends TestCase {
 	 
 	    @Override
 	    public boolean matches(NtlmPasswordAuthentication creds) {
-	    	if(creds.getDomain().equalsIgnoreCase(expected.getDomain())) {
-	    		return false;
-	    	} else if(creds.getUsername().equalsIgnoreCase(expected.getUsername())) {
-	    		return false;
-	    	} else if(creds.getPassword().equalsIgnoreCase(expected.getPassword())) {
-	    		return false;
-	    	}
-	    	return true;
+	    	return creds != null
+	    			&& creds.getDomain().equalsIgnoreCase(expected.getDomain())
+	    			&& creds.getUsername().equalsIgnoreCase(expected.getUsername())
+	    			&& creds.getPassword().equals(expected.getPassword());
 	    }
 
 	}
