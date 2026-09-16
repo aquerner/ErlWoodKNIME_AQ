@@ -16,12 +16,38 @@
 			<groupId>jcifs</groupId>
 			<artifactId>jcifs</artifactId>
 			<version>1.3.17</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>ch.swaechter</groupId>
 			<artifactId>smbjwrapper</artifactId>
 			<version>0.0.8</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- transitive dependencies of smbj / poi-ooxml pinned to the versions those
+		     artifacts declare, so the target platform's newer copies (injected by Tycho
+		     with compile scope) do not replace them in target/lib -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.11.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.21</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
@@ -29,6 +55,7 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.2.2</version>
+			<scope>provided</scope>
 			<!-- <exclusions>
 				<exclusion>
 					<groupId>xml-apis</groupId>

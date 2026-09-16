@@ -36,7 +36,6 @@ import java.util.Map;
 import java.util.TimeZone;
 import java.util.zip.GZIPOutputStream;
 
-import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
