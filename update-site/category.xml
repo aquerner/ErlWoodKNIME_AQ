@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.erlwood.features.core.base" version="0.0.0">
+      <category name="erlwood"/>
+   </feature>
+   <feature id="org.erlwood.features.cheminformatics.base" version="0.0.0">
+      <category name="erlwood"/>
+   </feature>
+   <category-def name="erlwood" label="Erlwood Open Source"/>
+</site>

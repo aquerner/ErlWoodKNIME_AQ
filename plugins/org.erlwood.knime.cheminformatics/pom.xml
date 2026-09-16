@@ -17,12 +17,24 @@
 			<groupId>net.sf.jsci</groupId>
 			<artifactId>jsci</artifactId>
 			<version>1.2</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>xerces</groupId>
+					<artifactId>xercesImpl</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		
 		<dependency>
 			<groupId>de.sciss</groupId>
 			<artifactId>prefuse-core</artifactId>
 			<version>1.0.1</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
